@@ -46,9 +46,9 @@ public class PhyphoxClient {
     }
 
     /**
-     * Tells what variable from the experiment to fetch
-     * Should not the used by the user
-     * Implmentations of PhyphoxSensor use this function
+     * Tells what variable from the experiment to fetch.
+     * Should not the used by the user.
+     * Implmentations of PhyphoxSensor use this function.
      * @param query name of the in-experiment variable to fetch
      */
     public void addQuery(String query) {
