@@ -9,10 +9,10 @@ public class PhyphoxClientTest {
    public static void main(String[] args) throws IOException {
        PhyphoxClient client = PhyphoxClient.connect("192.168.0.1", 8080);
 
-       var acc = (PhyphoxAccelerometer) client.getSensor(PhyphoxSensors.ACCELEROMETER);
+       var acc = (PhyphoxAccelerometer) client.registerSensor(PhyphoxSensors.ACCELEROMETER);
        acc.include("x");
 
-       var gyr = (PhyphoxGyroscope) client.getSensor(PhyphoxSensors.GYROSCOPE);
+       var gyr = (PhyphoxGyroscope) client.registerSensor(PhyphoxSensors.GYROSCOPE);
        gyr.include("x");
        gyr.include("y");
        gyr.include("z");
