@@ -18,12 +18,18 @@ public class PhyphoxClient {
 
     private Any buffer;
 
-    public PhyphoxClient(String uri, Any config) {
+    private PhyphoxClient(String uri, Any config) {
         this.uri = uri;
         this.config = config;
         getRequest = uri + "get?";
     }
 
+    /**
+     * Connects to a remote experiment sever at the given address
+     * @param addr remote host address
+     * @param port remote host port
+     * @throws ConnectException in case connection cannot be established
+     */
     public static PhyphoxClient connect(String addr, int port) throws ConnectException {
         try {
             final String uri = "http://" + addr + ":" + port + "/";
@@ -39,11 +45,22 @@ public class PhyphoxClient {
         }
     }
 
+    /**
+     * Tells what variable from the experiment to fetch
+     * Should not the used by the user
+     * Implmentations of PhyphoxSensor use this function
+     * @param query name of the in-experiment variable to fetch
+     */
     public void addQuery(String query) {
         getRequest += query + "&";
     }
 
-    public PhyphoxSensor getSensor(PhyphoxSensors sensor) throws NoSuchObjectException {
+    /**
+     * Tells the client instance to fetch this sensor's data
+     * @param sensor sensor to fetch data from
+     * @throws NoSuchObjectException in case the experiment does not contain such a sensor
+     */
+    public PhyphoxSensor registerSensor(PhyphoxSensors sensor) throws NoSuchObjectException {
         final String sensorName = sensor.phyphoxName();
 
         boolean found = false;
@@ -73,6 +90,10 @@ public class PhyphoxClient {
         };
     }
 
+    /**
+     * Starts the experiment
+     * @return true if the experiment has been started successfully, otherwise, false
+     */
     public boolean start() {
         try {
             final URL url = new URL(uri + "control?cmd=start");
@@ -85,6 +106,10 @@ public class PhyphoxClient {
         }
     }
 
+    /**
+     * Starts the experiment
+     * @return true if the experiment has been stopped successfully, otherwise, false
+     */
     public boolean stop() {
         try {
             final URL url = new URL(uri + "control?cmd=stop");
@@ -97,6 +122,10 @@ public class PhyphoxClient {
         }
     }
 
+    /**
+     * Clears experiment's buffers
+     * @return true if the experiment's bufer has been successfully cleaned, otherwise, false
+     */
     public boolean clear() {
         try {
             final URL url = new URL(uri + "control?cmd=clear");
@@ -109,6 +138,10 @@ public class PhyphoxClient {
         }
     }
 
+    /**
+     * Fetches the latest data from the sensors
+     * @return true if the data fetch went succesfull, otherwise, false
+     */
     public boolean update() {
         try {
             final var url = new URL(getRequest);
@@ -124,6 +157,9 @@ public class PhyphoxClient {
         }
     }
 
+    /**
+     * @return The last saved buffer with the latest sensors' data
+     */
     public Any getBuffer() {
         return buffer;
     }
