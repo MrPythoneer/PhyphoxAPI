@@ -10,9 +10,11 @@ public class PhyphoxClientTest {
        PhyphoxClient client = PhyphoxClient.connect("192.168.0.1", 8080);
 
        var acc = (PhyphoxAccelerometer) client.registerSensor(PhyphoxSensors.ACCELEROMETER);
+       assert acc != null;
        acc.include("x");
 
        var gyr = (PhyphoxGyroscope) client.registerSensor(PhyphoxSensors.GYROSCOPE);
+       assert gyr != null;
        gyr.include("x");
        gyr.include("y");
        gyr.include("z");
