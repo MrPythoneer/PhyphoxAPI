@@ -56,9 +56,10 @@ public class PhyphoxClient {
     }
 
     /**
-     * Tells the client instance to fetch this sensor's data
+     * Tells the client instance to fetch data from this sensor
      * @param sensor sensor to fetch data from
      * @throws NoSuchObjectException in case the experiment does not contain such a sensor
+     * @return Class representing this sensor
      */
     public PhyphoxSensor registerSensor(PhyphoxSensors sensor) throws NoSuchObjectException {
         final String sensorName = sensor.phyphoxName();
@@ -123,8 +124,8 @@ public class PhyphoxClient {
     }
 
     /**
-     * Clears experiment's buffers
-     * @return true if the experiment's bufer has been successfully cleaned, otherwise, false
+     * Clears experiment buffers
+     * @return true if the experiment buffer has been successfully cleaned, otherwise, false
      */
     public boolean clear() {
         try {
@@ -158,7 +159,7 @@ public class PhyphoxClient {
     }
 
     /**
-     * @return The last saved buffer with the latest sensors' data
+     * @return The last saved buffer with all the data from sensors
      */
     public Any getBuffer() {
         return buffer;
