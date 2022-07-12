@@ -61,7 +61,7 @@ public class PhyphoxClient {
      * @throws NoSuchObjectException in case the experiment does not contain such a sensor
      * @return Class representing this sensor
      */
-    public PhyphoxSensor registerSensor(PhyphoxSensors sensor) throws NoSuchObjectException {
+    public PhyphoxSensor registerSensor(PhyphoxSensors sensor) {
         final String sensorName = sensor.phyphoxName();
 
         boolean found = false;
@@ -73,7 +73,7 @@ public class PhyphoxClient {
         }
 
         if (!found)
-            throw new NoSuchObjectException("There's no such a sensor in the experiment");
+            return null;
 
         return switch (sensor) {
             case ACCELEROMETER -> new PhyphoxAccelerometer(this);
