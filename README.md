@@ -1,11 +1,8 @@
 # PhyphoxAPI
-Provides API for fetching data from remote experiments
-
-If you don't know what Phyphox is, find it out on its [official website](https://phyphox.org/)
-
-***
 
 The API provieds an easy way to access remote experiment sensors data
+
+If you don't know what Phyphox is, find it out on its [official website](https://phyphox.org/)
 
 ### Example
 ```Java
